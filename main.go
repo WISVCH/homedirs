@@ -23,6 +23,7 @@ type LoginForm struct {
 const UsernameRegex = "^[a-zA-Z][a-zA-Z\\d\\-_]+$"
 const serverAddress = "ldaps://ank.chnet"
 const filenamePattern = "/data/%s.zip"
+const downloadName = "ch-homedir-%s.zip"
 
 var roots = x509.NewCertPool()
 
@@ -76,7 +77,7 @@ func main() {
 					})
 					return
 				}
-				c.File(filename)
+				c.FileAttachment(filename, fmt.Sprintf(downloadName, form.Username))
 			}
 		} else {
 			c.HTML(http.StatusOK, "form.html", gin.H{
