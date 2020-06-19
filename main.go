@@ -20,7 +20,7 @@ type LoginForm struct {
 	Password string `form:"password" binding:"required"`
 }
 
-const UsernameRegex = "^[a-zA-Z][a-zA-Z\\d\\-_]+$"
+const UsernameRegex = "^[a-z][a-z\\d\\-_]+$"
 const serverAddress = "ldaps://ank.chnet"
 const filenamePattern = "/data/%s.zip"
 const downloadName = "ch-homedir-%s.zip"
@@ -82,7 +82,7 @@ func main() {
 		} else {
 			c.HTML(http.StatusOK, "form.html", gin.H{
 				"username": form.Username,
-				"error":    "Could not validate form",
+				"error":    "Invalid username (must be lowercase)",
 			})
 			return
 		}
